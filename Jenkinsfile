@@ -23,11 +23,12 @@ pipeline {
              }
            }
          }
-         stage("Archiving artifacts") {
+         stage('Archive Artifacts') {
              steps {
-               archiveArtifacts artifacts: 'target/*.war'
-               }
+                 archiveArtifacts 'target/*.war'
+             }
          }
+
 
         stage('Code Deployment'){
             steps {
