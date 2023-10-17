@@ -16,16 +16,17 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                // Run SonarQube analysis using the SonarScanner
-                script {
-                   withCredentials([string(credentialsId: 'gene-token', variable: 'SONAR_TOKEN')])
-                    def scannerHome = tool name: 'SonarQubeScanner'
-                    bat  "${scannerHome}/bin/sonar-scanner"
-                }
-            }
-        }
+      stage('SonarQube Analysis') {
+          steps {
+              script {
+                  def scannerHome = tool name: 'SonarQubeScanner'
+                  withCredentials([string(credentialsId: 'gene-token', variable: 'SONAR_TOKEN')]) {
+                      bat  "${scannerHome}/bin/sonar-scanner -Dsonar.login=${SONAR_TOKEN}"
+                  }
+              }
+          }
+      }
+
 
 
         stage('Deploy to Tomcat') {
