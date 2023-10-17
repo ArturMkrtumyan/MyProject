@@ -20,7 +20,7 @@ pipeline {
             steps {
                 // Run SonarQube analysis using the SonarScanner
                 script {
-                    def scannerHome = tool name: 'sq1'
+                    def scannerHome = tool name: 'SonarQubeScanner'
                     bat  "${scannerHome}/bin/sonar-scanner"
                 }
             }
