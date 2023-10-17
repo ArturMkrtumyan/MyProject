@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps {
                 // Deploy the WAR file to your Tomcat server
-bat 'echo "Attempting to copy..." && C:\\Windows\\System32\\copy C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\CICD_Pipline\\target\\MyProject-0.0.1-SNAPSHOT.war C:\\apache-tomcat-10.1.14\\webapps'
+bat "cmd /c copy C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\CICD_Pipline\\target\\MyProject-0.0.1-SNAPSHOT.war C:\\apache-tomcat-10.1.14\\webapps"
                 deploy adapters: [tomcat10(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8081/')], contextPath: 'MyProject', onFailure: false, war: 'target/*.war'
 
             }
