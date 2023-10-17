@@ -22,19 +22,10 @@ pipeline {
                bat './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
              }
            }
-        }
-
-        stage('Debug') {
-            steps {
-                // List the contents of the 'target' directory
-                bat 'dir target'
-            }
-        }
-
 
         stage('Code Deployment'){
             steps {
-        		deploy adapters: [tomcat9(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8081/')], contextPath: 'Planview', onFailure: false, war: 'target/*.war'
+        		deploy adapters: [tomcat9(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8081/')], contextPath: 'Planview', onFailure: false, war: '*.war'
         	}
        }
     }
