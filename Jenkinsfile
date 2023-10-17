@@ -20,6 +20,7 @@ pipeline {
             steps {
                 // Run SonarQube analysis using the SonarScanner
                 script {
+                   withCredentials([string(credentialsId: 'gene-token', variable: 'SONAR_TOKEN')])
                     def scannerHome = tool name: 'SonarQubeScanner'
                     bat  "${scannerHome}/bin/sonar-scanner"
                 }
