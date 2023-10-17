@@ -26,7 +26,7 @@ pipeline {
 
         stage('Code Deployment'){
             steps {
-        		deploy adapters: [tomcat9(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8081/')], contextPath: 'Planview', onFailure: false, war: '*.war'
+        		deploy adapters: [tomcat9(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8081/')], contextPath: 'Planview', onFailure: false, war: 'target/*.war'
         	}
        }
     }
