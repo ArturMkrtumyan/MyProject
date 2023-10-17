@@ -20,11 +20,12 @@ pipeline {
             steps {
                 // Run SonarQube analysis using the SonarScanner
                 script {
-                    def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    def scannerHome = tool name: 'SonarQubeScanner'
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
+
 
         stage('Deploy to Tomcat') {
             steps {
