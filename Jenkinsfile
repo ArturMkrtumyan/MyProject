@@ -11,24 +11,29 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Build your project using Maven
-                bat  'mvn clean test package'
+                bat  'mvn clean install'
             }
         }
 
         stage('Scan') {
              steps {
               withSonarQubeEnv(installationName: 'sq1') {
-               bat './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+               bat './mvnw  org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
              }
            }
-        }
-
+         }
+//          stage('Archive Artifacts') {
+//              steps {
+//                  archiveArtifacts 'target/*.war'
+//              }
+//          }
 
 
         stage('Code Deployment'){
-        		deploy adapters: [tomcat10(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8080/')], contextPath: 'Planview', onFailure: false, war: 'target/*.war'
+            steps {
+        		deploy adapters: [tomcat9(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8081/')], contextPath: null, war: 'target/*.war'
         	}
+       }
     }
 
 }
