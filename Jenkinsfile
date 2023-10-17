@@ -25,14 +25,14 @@ pipeline {
          }
          stage('Archive Artifacts') {
              steps {
-                 archiveArtifacts 'target/*.war'
+                 archiveArtifacts 'C:\WINDOWS\system32\config\systemprofile\.m2\repository\com\example\MyProject\0.0.1-SNAPSHOT\MyProject-0.0.1-SNAPSHOT.war'
              }
          }
 
 
         stage('Code Deployment'){
             steps {
-        		deploy adapters: [tomcat9(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8081/')], contextPath: 'Planview', onFailure: false, war: 'target/*.war'
+        		deploy adapters: [tomcat9(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8081/')], contextPath: 'Planview', onFailure: false, war: 'C:\WINDOWS\system32\config\systemprofile\.m2\repository\com\example\MyProject\0.0.1-SNAPSHOT\MyProject-0.0.1-SNAPSHOT.war'
         	}
        }
     }
