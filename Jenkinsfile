@@ -36,9 +36,4 @@ pipeline {
         }
     }
 
-    post {
-        success {
-            // Define actions to take on successful build
-        }
-    }
 }
