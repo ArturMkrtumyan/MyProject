@@ -26,17 +26,9 @@ pipeline {
 
 
 
-
-
-
-        stage('Deploy to Tomcat') {
-            steps {
-                // Deploy the WAR file to your Tomcat server
-                bat "copy target/MyProject-0.0.1-SNAPSHOT.war C:\\apache-tomcat-10.1.14\\webapps"
-                deploy adapters: [tomcat10(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8081/')], contextPath: 'MyProject', onFailure: false, war: 'target/*.war'
-
-            }
-        }
+        stage('Code Deployment'){
+        		deploy adapters: [tomcat10(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8080/')], contextPath: 'Planview', onFailure: false, war: 'target/*.war'
+        	}
     }
 
 }
