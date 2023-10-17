@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Build your project using Maven
-                sh 'mvn clean test package'
+                bat  'mvn clean test package'
             }
         }
 
@@ -21,7 +21,7 @@ pipeline {
                 // Run SonarQube analysis using the SonarScanner
                 script {
                     def scannerHome = tool name: 'SonarQubeScanner'
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    bat  "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps {
                 // Deploy the WAR file to your Tomcat server
-                sh 'cp target/MyProject-0.0.1-SNAPSHOT.war. /path/to/tomcat/webapps'
+                bat  'cp target/MyProject-0.0.1-SNAPSHOT.war. /path/to/tomcat/webapps'
                 deploy adapters: [tomcat10(credentialsId: 'TomcatCreds', path: '', url: 'http://localhost:8081/')], contextPath: 'MyProject', onFailure: false, war: 'target/*.war'
 
             }
