@@ -16,16 +16,16 @@ pipeline {
             }
         }
 
-      stage('SonarQube Analysis') {
-          steps {
-              script {
-                  def scannerHome = tool name: 'SonarQubeScanner'
-                  withCredentials([string(credentialsId: 'gene-token', variable: 'SONAR_TOKEN')]) {
-                      bat  "${scannerHome}/bin/sonar-scanner -Dsonar.login=${SONAR_TOKEN}"
-                  }
-              }
-          }
-      }
+        stage('Scan') {
+             steps {
+              withSonarQubeEnv(installationName: 'sq1') {
+               bat './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+             }
+            }
+        }
+
+
+
 
 
 
