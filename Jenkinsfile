@@ -15,6 +15,13 @@ pipeline {
             }
         }
 
+        stage('Test & Jacoco Static Analysis') {
+             steps{
+                    junit 'target/surefire-reports/**/*.xml'
+                    jacoco()
+                   }
+                }
+
         stage('Scan') {
              steps {
               withSonarQubeEnv(installationName: 'sq1') {
