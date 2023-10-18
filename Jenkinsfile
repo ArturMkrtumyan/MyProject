@@ -29,12 +29,6 @@ pipeline {
              }
            }
          }
-//          stage('Archive Artifacts') {
-//              steps {
-//                  archiveArtifacts 'target/*.war'
-//              }
-//          }
-
 
         stage('Code Deployment'){
             steps {
